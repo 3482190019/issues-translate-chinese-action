@@ -57,7 +57,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: tomsun28/issues-translate-action@v2.6
+      - uses: a631807682/issues-translate-chinese-action@v1.01
         with:
           BOT_GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
           # 非必须，填写您的机器人github账户token
