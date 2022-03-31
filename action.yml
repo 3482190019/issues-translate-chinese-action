@@ -1,9 +1,9 @@
-name: 'Issues Translator'
+name: 'Issues Chinese Translator'
 description: 'The action for translating Chinese issues content to English.'
 branding:
   icon: 'disc'
   color: 'orange'
-author: 'tomsun28'
+author: 'a631807682'
 inputs:
   BOT_GITHUB_TOKEN: 
     description: 'The issue comment bot GITHUB_TOKEN.'
