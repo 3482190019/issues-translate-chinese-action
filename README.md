@@ -26,7 +26,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: a631807682/issues-translate-chinese-action@v1.01
+      - uses: a631807682/issues-translate-chinese-action@v1.0.3
         with:
           IS_MODIFY_TITLE: false
           # not require, default false, . Decide whether to modify the issue title
@@ -59,7 +59,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: a631807682/issues-translate-chinese-action@v1.01
+      - uses: a631807682/issues-translate-chinese-action@v1.0.3
         with:
           BOT_GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
           # Required, input your bot github token
