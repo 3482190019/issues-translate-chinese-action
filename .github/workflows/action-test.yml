@@ -11,9 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./
-        # with:
-          # BOT_GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
         with:
+          BOT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
           IS_MODIFY_TITLE: true
           CUSTOM_BOT_NOTE: custom message - Bot detected the issue body's language is not English, translate it automatically. 👯👭🏻🧑‍🤝‍🧑👫🧑🏿‍🤝‍🧑🏻👩🏾‍🤝‍👨🏿👬🏿
           
