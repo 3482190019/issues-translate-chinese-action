@@ -1,7 +1,8 @@
 
-# Issues Translate Action  
+# Issues Translate Chinese Action  
+> Issues markdown contains multiple languages and code, and we can only guess which one it is, but that's pretty inaccurate, so we will only check if it contains Chinese. 
 
-The action for translating Non-English issues content to English.   
+The action for translating Chinese issues content to English.   
 
 [中文文档](README_CN.md)   
 

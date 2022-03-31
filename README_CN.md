@@ -1,7 +1,8 @@
 
-# Issues Translate Action  
+# Issues Translate Chinese Action  
+> 问题标记包含多种语言和代码，我们只能猜测是哪一种，但这是非常不准确的，所以这里只检查是否包含中文。
 
-将非英文issue实时翻译成英文issue的action。     
+将包含中文issue实时翻译成英文issue的action。     
 
 
 ## 快速使用    
@@ -28,7 +29,7 @@ jobs:
           IS_MODIFY_TITLE: false
           # 非必须，决定是否需要修改issue标题内容   
           # 若是true，则机器人账户@Issues-translate-bot必须拥有修改此仓库issue权限。可以通过邀请@Issues-translate-bot加入仓库协作者实现。
-          CUSTOM_BOT_NOTE: Bot detected the issue body's language is not English, translate it automatically. 👯👭🏻🧑‍🤝‍🧑👫🧑🏿‍🤝‍🧑🏻👩🏾‍🤝‍👨🏿👬🏿
+          CUSTOM_BOT_NOTE: Bot detected the issue body's language is not English, translate it automatically.
           # 非必须，自定义机器人翻译的前缀开始内容。  
 ````
 

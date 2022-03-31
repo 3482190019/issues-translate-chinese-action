@@ -3,7 +3,7 @@ import * as github from '@actions/github'
 import * as webhook from '@octokit/webhooks'
 import translate from '@tomsun28/google-translate-api'
 
-let franc = require('franc-min')
+const cmn = /[\u2E80-\u2E99\u2E9B-\u2EF3\u2F00-\u2FD5\u3005\u3007\u3021-\u3029\u3038-\u303B\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFA6D\uFA70-\uFAD9]|\uD81B[\uDFE2\uDFE3\uDFF0\uDFF1]|[\uD840-\uD868\uD86A-\uD86C\uD86F-\uD872\uD874-\uD879\uD880-\uD883][\uDC00-\uDFFF]|\uD869[\uDC00-\uDEDF\uDF00-\uDFFF]|\uD86D[\uDC00-\uDF38\uDF40-\uDFFF]|\uD86E[\uDC00-\uDC1D\uDC20-\uDFFF]|\uD873[\uDC00-\uDEA1\uDEB0-\uDFFF]|\uD87A[\uDC00-\uDFE0]|\uD87E[\uDC00-\uDE1D]|\uD884[\uDC00-\uDF4A]/g
 
 async function run(): Promise<void> {
   try {
@@ -54,11 +54,11 @@ async function run(): Promise<void> {
     }
 
     // detect issue title comment body is english
-    if (originComment !== null && detectIsEnglish(originComment)) {
+    if (originComment !== null && !containsChinese(originComment, 0.2)) {
       needCommitComment = false
       core.info('Detect the issue comment body is english already, ignore.')
     }
-    if (originTitle !== null && detectIsEnglish(originTitle)) {
+    if (originTitle !== null && !containsChinese(originTitle, 0)) {
       needCommitTitle = false
       core.info('Detect the issue title body is english already, ignore.')
     }
@@ -192,25 +192,35 @@ ${translateComment}
     }
     core.setOutput('complete time', new Date().toTimeString())
   } catch (error) {
-    core.setFailed(error.message)
+    core.setFailed((error as Error).message)
   }
 }
 
-function detectIsEnglish(body: string | null): boolean | true {
+/**
+ * Get the occurrence ratio of `expression` for `value`.
+ *
+ * @param {string} value
+ *   Value to check.
+ * @param {RegExp} expression
+ *   Code-point expression.
+ * @return {number}
+ *   Float between 0 and 1.
+ */
+function getOccurrence(value: string, expression: RegExp): number {
+  const count = value.match(expression)
+
+  return (count ? count.length : 0) / value.length || 0
+}
+
+function containsChinese(body: string | null, percent: number): boolean | true {
   if (body === null) {
     return true
   }
-  const detectResult = franc(body)
-  if (
-    detectResult === 'und' ||
-    detectResult === undefined ||
-    detectResult === null
-  ) {
-    core.warning(`Can not detect the undetermined comment body: ${body}`)
-    return false
-  }
-  core.info(`Detect comment body language result is: ${detectResult}`)
-  return detectResult === 'eng'
+
+  // remove comment
+  body = body.replace(/<!--[\s\S]*?-->/g, '')
+  const count = getOccurrence(body, cmn)
+  return count > percent
 }
 
 async function translateIssueOrigin(body: string): Promise<string> {
