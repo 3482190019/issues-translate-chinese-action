@@ -1,3 +1,8 @@
+# Archive this repository
+Use [issues-translator](https://github.com/a631807682/issues-translator) instead
+The reason is that guessing the language the user is using is hard to do in an issue, 
+First, many languages have the same parts, and second, issues contain a lot of formatting, comments and code
+
 # Issues Translate Chinese Action
 
 > Issues markdown contains multiple languages and code, and we can only guess which one it is, but that's pretty inaccurate, so we will only check if it contains Chinese.
