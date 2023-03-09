@@ -1,4 +1,4 @@
-name: 'build-test'
+name: 'Issues Chinese Translator'
 on: 
   issue_comment: 
     types: [created]
@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - uses: a631807682/issues-translate-chinese-action@v1.0.3
+
         with:
           BOT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
           IS_MODIFY_TITLE: true
